@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>PP文創商店QA</title>
 </head>
+
 <body>
     <h1>查詢</h1>
-    <input type="text" id="query" placeholder="請問出你要問的問題">
+    <label for="query">請問您要問的問題：</label>
+    <select id="query">
+        <option value="">請選擇或輸入問題</option>
+        <option value="PP文創電商">PP文創電商</option>
+        <option value="核心價值">核心價值</option>
+        <!-- Add more example questions as needed -->
+    </select>
     <button onclick="search()">Search</button>
     <p id="result"></p>
 
     <script>
         function search() {
-            var query = document.getElementById('query').value;
+            var queryInput = document.getElementById('query');
+            var query = queryInput.value;
+
+            // If the user typed a custom question, use that; otherwise, use the selected example question.
+            if (query === "") {
+                alert("請選擇或輸入問題");
+                return;
+            }
+
             var url = 'https://script.google.com/macros/s/AKfycbxA6V1_OIizJsxKewim67CNeJsJXdT3vRSPCVPRJNaRL0R5rOx-mwbqAR7HRQxiSO4Z1g/exec?q=' + encodeURIComponent(query);
 
             fetch(url)
@@ -21,4 +37,5 @@
         }
     </script>
 </body>
+
 </html>
